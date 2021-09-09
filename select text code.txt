@@ -1,0 +1,9 @@
+ function copydata() {
+          
+            var copyText = document.getElementById("textsummary");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            document.execCommand("copy");
+           
+            
+        }

@@ -1,0 +1,7 @@
+function del() {
+
+            document.getElementById("textsummary").value = "";
+            
+
+          
+        }

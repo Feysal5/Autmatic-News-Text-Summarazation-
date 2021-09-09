@@ -1,0 +1,92 @@
+ int blockanddoc = howmanyblock + 1;
+                string[] docandblock = new string[blockanddoc];
+                for (int h = 0; h <= howmanyblock; h++)
+                {
+                    if (h == 0)
+                    {
+                        docandblock[h] = whoeldoc;
+                    }
+                    else
+                    {
+
+                        docandblock[h] = newblock[h - 1];
+                    }
+                }
+
+                int ro = docandblock.Length;
+                int roo = whoeldoc.Split(' ').Length;
+                double[,] tf = new double[ro, roo];
+                double[] df = new double[roo];
+
+
+
+
+                string[] dd = whoeldoc.Split(' ');
+                int ddcount = dd.Length;
+                for (int kn = 0; kn < ro; kn++)
+                {
+                    string[] dd1 = docandblock[kn].Split(' ');
+                    int ddcount1 = dd1.Length;
+                    int fre = 0;
+                    int ffre = 0;
+                    for (int Kmm = 0; Kmm < ddcount - 1; Kmm++)
+                    {
+
+                        for (int knn = 0; knn < ddcount1 - 1; knn++)
+                        {
+
+                            if (dd[Kmm].ToLower() == dd1[knn].ToLower())
+                            {
+                                fre++;
+                            }
+
+                        }
+                        if (fre > 0)
+                        {
+                            ffre++;
+                        }
+                        tf[kn, Kmm] = fre;
+                        df[Kmm] = df[Kmm] + 1;
+                        fre = 0;
+
+                    }
+
+                }
+                double[] idf = new double[roo];
+                double jb = 0;
+                for (int i = 0; i < roo; i++)
+                {
+                    jb = howmanyblock / df[i];
+                    idf[i] = Math.Log(jb);
+
+                }
+                double[,] tfidf = new double[ro, roo];
+                for (int i = 0; i < ro; i++)
+                {
+                    for (int j = 0; j < roo; j++)
+                    {
+                        tfidf[i, j] = tf[i, j] * idf[j];
+                    }
+                }
+                int w = howmanyblock + 1;
+                double[,] weight = new double[howmanyblock, w];
+                double wei = 0;
+                for (int i = 1; i < ro-1; i++)
+                {
+                    for (int j = 0; j < ro; j++)
+                    {
+                        if (i == j)
+                        {
+                            weight[i, j] = 0;
+                        }
+                        else
+                        {
+
+                            for (int k = 0; k < roo; k++)
+                            {
+                                wei = wei + tfidf[i, k] * tfidf[j, k];
+                            }
+                            weight[i - 1, j] = wei;
+                        }
+                    }
+                }

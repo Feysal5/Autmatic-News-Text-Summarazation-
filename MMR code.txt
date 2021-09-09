@@ -1,0 +1,40 @@
+ string result = "";
+                double max = -100;
+                int maxindex =0;
+                double sim1 = 0;
+                double sim2 = 0;
+                double[] MMRscore=new double[howmanyblock];
+                for (int i = 0; i < ro-1; i++)
+                {
+                    for (int j = 0; j < ro; j++)
+                    {
+                        if (j == 0)
+                        {
+                            sim1 = weight[i, j];
+                        }
+                        else if(weight[i, j] > max)
+                        {
+                            max = weight[i, j];
+                            sim2 = max;
+                        }
+                        
+ }
+                    MMRscore[i] = (0.5 * sim1) - (1 - 0.5) * sim2;
+                    //if (weight[i, 0] > max)
+                    //{
+                    //    max = weight[i, 0];
+                    //    maxindex=i;
+
+                    //}
+                    //result = block[maxindex];
+                    double maxval = MMRscore.Max();
+                    int maxvalindex= MMRscore.ToList().IndexOf(maxval);
+                    result = block[maxvalindex];
+                    
+                }
+                return Content(result);
+
+            }
+
+
+        }
